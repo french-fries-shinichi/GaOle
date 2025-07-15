@@ -11,6 +11,7 @@ public class Pokemon {
 	private int defense;
 	private int speed;
 	
+	//Constructor Method
 	public Pokemon(String name, int collectionNumber, int pokemonPE, String moveType,
 			int healthPoints, int attack, int defense, int speed) {
 		
@@ -24,11 +25,15 @@ public class Pokemon {
 		this.speed = speed;
 	}
 	
+	//Method to deal damage to Pokemon
 	public void takeDamage(int damage) {
 		healthPoints -= damage;
 		if (damage < 0) healthPoints = 0;
 	}
 	
+	/*Method used to measure the damage to
+	 * inflict on other Pokemon
+	 */
 	public void attack(Pokemon target) {
 		int damage = this.attack - target.defense;
 		if (damage < 0) damage = 0;
