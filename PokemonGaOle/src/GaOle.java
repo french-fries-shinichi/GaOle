@@ -14,8 +14,8 @@ public class GaOle {
 		// create a set of 3 pokemons, which will be done by stage object's
 		// constructor method upon initialization, then display the choices on
 		// screen, then player catches one of the pokemons with catchOne() method
-		Disk captured = new Disk();
-		captured = currentStage.catchTime();
+		
+		// PLACE BLOCK OF CODE
 
 		// Battle Time!:
 		// generate two wild pokemon, then display their type and affinities
