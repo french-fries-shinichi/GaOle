@@ -11,7 +11,7 @@ import Entity.Pokemon;
 public class Stage { // declare attributes
 	private String stageName;
 	private Set<Pokemon> likelyPokemons;
-	private Set<Pokemon> catchTimePokemons;
+	//private Set<Pokemon> catchTimePokemons;
 	private Pokemon capturedPokemon;
 	private int battleScore;
 	private int gaOleMedals;
@@ -20,7 +20,7 @@ public class Stage { // declare attributes
 	public Stage(String stageName) {
 		this.stageName = stageName;
 		this.likelyPokemons = generatePokemonPool();
-		this.catchTimePokemons = weightedRandomSelection(new ArrayList<>(likelyPokemons), 2);
+		//this.catchTimePokemons = weightedRandomSelection(new ArrayList<>(likelyPokemons), 2);
 		this.battleScore = 0;
 		this.gaOleMedals = 0;
 	}
@@ -66,9 +66,9 @@ public class Stage { // declare attributes
 		this.capturedPokemon = p;
 	}
 
-	public Set<Pokemon> getCatchTimePokemons() {
-		return catchTimePokemons;
-	}
+//	public Set<Pokemon> getCatchTimePokemons() {
+//		return catchTimePokemons;
+//	}
 
 	public Pokemon getCapturedPokemon() {
 		return capturedPokemon;
@@ -77,9 +77,9 @@ public class Stage { // declare attributes
 	public void displayStageInfo() {
 		System.out.println("Stage: " + stageName);
 		System.out.println("Catch-Time Pokémons:");
-		for (Pokemon p : catchTimePokemons) {
-			System.out.println("- " + p);
-		}
+//		for (Pokemon p : catchTimePokemons) {
+//			System.out.println("- " + p);
+//		}
 		System.out.println("Captured Pokémon: " + (capturedPokemon != null ? capturedPokemon : "None"));
 	}
 }

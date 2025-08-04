@@ -1,8 +1,12 @@
+import java.util.Scanner;
 import stage.Stage;
+
 
 public class Game {
 	private Stage selectedStage;
 	private int battleScore;
+	String [] Pokemons = {"rayquaza", "jessie", "misty"};
+	private Pokemon playerPokemon;
 	
 	public void start() {
 		catchTime();
@@ -16,11 +20,24 @@ public class Game {
 	}
 	
 	public void catchTime() {
-		// start catch time with the selected stage
+		System.out.println("catch time! choose a pokemon to catch:");
 		
-		// generate two pokemons
-		// then print them
-		// then give player choice of choosing between the two
+		for (int i = 0; i < Pokemons.length; i++) {
+			
+			System.out.println((i + 1) + " " + Pokemons[i]);
+			
+		}
+		System.out.println("GAME START");
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("Enter Number 1---3: ");
+		int choice = scanner.nextInt();
+		
+		if (choice >= 1 && choice <= 3) {
+			System.out.println("you caught " + Pokemons[choice - 1] + "!");
+			
+		}  else {
+			System.out.println("invalid choice.No pokemon caught GAME OVER!");
+		}
 	}
 	
 	public void battleTime() {
