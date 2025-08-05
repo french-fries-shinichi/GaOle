@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import Entity.Pokemon;
 import stage.Stage;
 
 
