@@ -1,4 +1,5 @@
 //import stage.Stage;
+import Entity.Pokemon;
 
 public class GaOle {
 
@@ -6,7 +7,7 @@ public class GaOle {
 		// TODO Auto-generated method stub
 
 		Game newGame = new Game(); // currently undefined
-		Disk playerData = new Disk();
+		Pokemon playerData = new Pokemon();
 
 		newGame.start(playerData);
 	}

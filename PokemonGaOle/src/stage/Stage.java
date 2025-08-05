@@ -12,34 +12,35 @@ public class Stage { // declare attributes
 	private String stageName;
 	private Set<Pokemon> likelyPokemons;
 	//private Set<Pokemon> catchTimePokemons;
-	private Pokemon capturedPokemon;
-	private int battleScore;
-	private int gaOleMedals;
+	//private Pokemon capturedPokemon;
+	//private int battleScore;
+	//private int gaOleMedals;
+	private static Stage[] allStages;
 
 	// Constructor stageName
 	public Stage(String stageName) {
 		this.stageName = stageName;
-		this.likelyPokemons = generatePokemonPool();
+		//this.likelyPokemons = generatePokemonPool();
 		//this.catchTimePokemons = weightedRandomSelection(new ArrayList<>(likelyPokemons), 2);
-		this.battleScore = 0;
-		this.gaOleMedals = 0;
+		//this.battleScore = 0;
+		//this.gaOleMedals = 0;
 	}
 
 	// list of 10 Pokemons (it can be anyth)
-	private Set<Pokemon> generatePokemonPool() {
-		Set<Pokemon> pokemons = new HashSet<>();
-		pokemons.add(new Pokemon("Pikachu", 2));
-		pokemons.add(new Pokemon("Bulbasaur", 3));
-		pokemons.add(new Pokemon("Charmander", 4));
-		pokemons.add(new Pokemon("Sylveon", 3));
-		pokemons.add(new Pokemon("Eevee", 1));
-		pokemons.add(new Pokemon("Mewtwo", 5));
-		pokemons.add(new Pokemon("Umbreon", 4));
-		pokemons.add(new Pokemon("Lucario", 5));
-		pokemons.add(new Pokemon("Jigglypuff", 2));
-		pokemons.add(new Pokemon("Machop", 2));
-		return pokemons;
-	}
+//	private Set<Pokemon> generatePokemonPool() {
+//		Set<Pokemon> pokemons = new HashSet<>();
+//		pokemons.add(new Pokemon("Pikachu", 2));
+//		pokemons.add(new Pokemon("Bulbasaur", 3));
+//		pokemons.add(new Pokemon("Charmander", 4));
+//		pokemons.add(new Pokemon("Sylveon", 3));
+//		pokemons.add(new Pokemon("Eevee", 1));
+//		pokemons.add(new Pokemon("Mewtwo", 5));
+//		pokemons.add(new Pokemon("Umbreon", 4));
+//		pokemons.add(new Pokemon("Lucario", 5));
+//		pokemons.add(new Pokemon("Jigglypuff", 2));
+//		pokemons.add(new Pokemon("Machop", 2));
+//		return pokemons;
+//	}
 
 	// Rarer Pokemon = lower chance to appear
 	private Set<Pokemon> weightedRandomSelection(List<Pokemon> pool, int count) {
@@ -62,17 +63,17 @@ public class Stage { // declare attributes
 		return result;
 	}
 
-	public void setCapturedPokemon(Pokemon p) {
-		this.capturedPokemon = p;
-	}
+//	public void setCapturedPokemon(Pokemon p) {
+//		this.capturedPokemon = p;
+//	}
 
 //	public Set<Pokemon> getCatchTimePokemons() {
 //		return catchTimePokemons;
 //	}
 
-	public Pokemon getCapturedPokemon() {
-		return capturedPokemon;
-	}
+//	public Pokemon getCapturedPokemon() {
+//		return capturedPokemon;
+//	}
 
 	public void displayStageInfo() {
 		System.out.println("Stage: " + stageName);
@@ -81,5 +82,14 @@ public class Stage { // declare attributes
 //			System.out.println("- " + p);
 //		}
 		System.out.println("Captured Pokémon: " + (capturedPokemon != null ? capturedPokemon : "None"));
+	}
+	
+	// I couldnt decide whether to use "toString" or static "displayAllStages" for my menu...
+	public static String displayAllStages() {
+		return "";
+	}
+	
+	public String toString() {
+		return String.format("%d - (stage-name)\n  likely pokemon: (pokemon-one), (pokemon-two), (pokemon-three)");
 	}
 }

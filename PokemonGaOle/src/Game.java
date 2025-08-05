@@ -1,3 +1,6 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 import Entity.Pokemon;
 import stage.Stage;
@@ -11,13 +14,18 @@ public class Game {
 	
 	public void start() {
 		catchTime();
-		
+		battleTime();
+		concludeStage();
 		// 
 	}
 	
 	public void selectStageMenu() {
-		//display list of stages available
-		//then store selected stage in a variable
+		
+		System.out.println("\n\n\n");
+		System.out.println("Select a stage to begin!");
+		for (int i = 0; i<5; i++) {
+			System.out.printf("%d - %s", i, stageName);
+		}
 	}
 	
 	public void catchTime() {
@@ -46,6 +54,31 @@ public class Game {
 	}
 	
 	public void concludeStage() {
+		// calculate battle score
+		System.out.println("You scored: 100 battle points!");
 		
+		// test if file exists
+		File leaderboardFile = new File("leaderboard.txt");
+		if (leaderboardFile.exists()) {
+			System.out.println("Opening leaderboard file...");
+		} else {
+			System.out.println("Looks like file doesn't exist...");
+			System.out.println("Attempting to create a leaderboard file");
+		}
+		
+		// read from file and parse it into a 5-items long array
+		
+		// store in a leaderboard file
+		try {
+			FileWriter leaderboardWriter = new FileWriter("filename.txt");
+			leaderboardWriter.write(String.format("%d", battleScore));
+			leaderboardWriter.close();
+		} catch (IOException e) {
+			System.out.println("An error has occured related to the file!");
+			e.printStackTrace();
+		}
+		
+		// display the results
+		//print the leaderboard here!
 	}
 }
