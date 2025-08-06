@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
+import java.util.Random;
 
 import stage.Stage;
 import Entity.*;
@@ -12,6 +13,7 @@ public class Game {
 	private int battleScore;
 	private Pokemon playerPokemon;
 	private Stage[] stageList;
+	private Pokemon[] Pokemons;
 	
 	// should these be local variables?
 	//private Pokemon[] wildPokemons;
@@ -20,9 +22,9 @@ public class Game {
 		this.battleScore = 0;
 		
 		Pokemon[] stageOnePokemonList = {
-			new ElectricPokemon("Pikachu", 50, 7, 3, 9),
-			new GrassPokemon("Bulbasaur", 72, 4, 8, 4),
-			new WaterPokemon("Squirtle", 64, 7, 5, 6)
+			new ElectricPokemon("Pikachu", 50, 7, "Thunderbolt", "Electric", 100, 9, 5, 8),
+			new GrassPokemon("Bulbasaur", 72, 4, "Vine Whip", "Grass", 100, 4, 6, 5),
+			new WaterPokemon("Squirtle", 64, 7, "Water Gun", "Water", 100, 6, 5, 7)
 		};
 		Stage pikachuStage = new Stage("Pikachu Area", stageOnePokemonList);
 		
@@ -50,7 +52,7 @@ public class Game {
 		//for (int i = 0; i<5; i++) {
 		//	System.out.printf("%d - %s", i, stageName);
 		//}
-		System.out.println("Oh no! We will just select a stage on ur behave (LMAO)");
+		System.out.println("Oh no! We will just select a stage on ur behalf (LMAO)");
 		selectedStage = stageList[0];
 	}
 	
@@ -92,12 +94,12 @@ public class Game {
 			 */
 
 			// Set the stage for the two Pokemons and display their types and affinities
-			Pokemon playerPokemon = new Pokemon("eevee", 2, 5, "Lightning", "Physical", 100, 10, 30, 60);
-			Pokemon enemyTarget = new Pokemon("Bulbasaur", 2, 5, "Lightning", "Special", 100, 10, 40, 67);
-			System.out.printf("Types and affinity of player's pokemon is: %s and %s", playerPokemon.PokemonTypeString(),
-					playerPokemon.PokemonAffinityString());
-			System.out.printf("Types and affinity of enemy pokemon is: %s with %s", enemyTarget.PokemonTypeString(),
-					enemyTarget.PokemonAffinityString());
+			Pokemon playerPokemon = new Pokemon("eevee", 2, 5, "Bite", "Normal", 100, 10, 30, 60);
+			Pokemon enemyTarget = new Pokemon("Bulbasaur", 2, 5, "Vine Whip", "Grass", 100, 10, 40, 67);
+			System.out.printf("Types and affinity of player's pokemon is: %s and %s", playerPokemon.getMoveType(),
+					playerPokemon.getPokemonType());
+			System.out.printf("Types and affinity of enemy pokemon is: %s with %s", enemyTarget.getMoveType(),
+					enemyTarget.getPokemonType());
 
 			// Player sends in the pokemon of their choice
 			Scanner input = new Scanner(System.in);
@@ -112,7 +114,7 @@ public class Game {
 
 			// Battle logic : as player sends pokemon...
 			while (sentPokemon != 0) {
-				while (enemyTarget.healthPoints != 0 || playerPokemon.healthPoints != 0) {
+				while (enemyTarget.getHealthPoints() != 0 || playerPokemon.getHealthPoints() != 0) {
 					System.out.println("What would you like to do?");
 					System.out.println("Attack or Defend");
 					String playerDecision = input.next();
@@ -123,12 +125,12 @@ public class Game {
 						enemyTarget.attack(playerPokemon);
 					}
 
-					if (enemyTarget.healthPoints == 0) {
+					if (enemyTarget.getHealthPoints() == 0) {
 						System.out.printf("%s has won!", enemyTarget);
 						break;
 					}
 
-					if (playerPokemon.healthPoints == 0) {
+					if (playerPokemon.getHealthPoints() == 0) {
 						System.out.printf("%s has won!", playerPokemon);
 						break;
 					}

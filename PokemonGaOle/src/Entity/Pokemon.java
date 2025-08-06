@@ -3,9 +3,10 @@ package Entity;
 public class Pokemon {
 	
 	private String name;
-	//private int collectionNumber;
-	//private int pokemonPE;
-	//private String moveType;
+	private int collectionNumber;
+	private int pokemonPE;
+	private String pokemonType;
+	private String moveType;
 	private int healthPoints;
 	
 	private int attack;
@@ -14,12 +15,14 @@ public class Pokemon {
 	
 	//Constructor Method
 	public Pokemon(String name,
-			int healthPoints, int attack, int defense, int speed) {
+			int collectionNumber, int pokemonPE, String moveType,
+			String pokemonType, int healthPoints, int attack, int defense, int speed) {
 		
 		this.name = name;
-		//this.collectionNumber = collectionNumber;
-		//this.pokemonPE = pokemonPE;
-		//this.moveType = moveType;
+		this.collectionNumber = collectionNumber;
+		this.pokemonPE = pokemonPE;
+		this.moveType = moveType;
+		this.pokemonType = pokemonType;
 		this.healthPoints = healthPoints;
 		this.attack = attack;
 		this.defense = defense;
@@ -29,6 +32,38 @@ public class Pokemon {
 	// Setters and Getters
 	public String getName() {
 		return name;
+	}
+
+	public int getCollectionNumber() {
+		return collectionNumber;
+	}
+
+	public int getPokemonPE() {
+		return pokemonPE;
+	}
+
+	public String getMoveType() {
+		return moveType;
+	}
+
+	public String getPokemonType() {
+		return pokemonType;
+	}
+
+	public int getHealthPoints() {
+		return healthPoints;
+	}
+
+	public int getAttack() {
+		return attack;
+	}
+
+	public int getDefense() {
+		return defense;
+	}
+
+	public int getSpeed() {
+		return speed;
 	}
 
 	//Method to deal damage to Pokemon

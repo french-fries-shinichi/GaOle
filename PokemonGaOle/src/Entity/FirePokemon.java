@@ -2,16 +2,16 @@ package Entity;
 
 public class FirePokemon extends Pokemon {
 	public FirePokemon(String name,
-			int healthPoints, int attack, int defense, int speed) {
-		
-		super(name, healthPoints, attack, defense, speed);
+			int collectionNumber, int pokemonPE, String moveType, String pokemonType, int healthPoints, int attack, int defense, int speed) {
+
+		super(name, collectionNumber, pokemonPE, moveType, pokemonType, healthPoints, attack, defense, speed);
 	}
 	
 	@Override public void attack(Pokemon target) {
-		int damage = this.attack - target.defense;
+		int damage = this.getAttack() - target.getDefense();
 		if (damage < 0) damage = 0;
 		target.takeDamage(damage);
-		System.out.println(this.name + " attacked " + target.name + " for " +
+		System.out.println(this.getName() + " attacked " + target.getName() + " for " +
 		damage + " damage!");
 		System.out.println("HELP");
 	}
