@@ -7,8 +7,8 @@ public class GaOle {
 		// TODO Auto-generated method stub
 
 		Game newGame = new Game(); // currently undefined
-		Pokemon playerData = new Pokemon();
+		Pokemon playerData;
 
-		newGame.start(playerData);
+		newGame.start();
 	}
 }

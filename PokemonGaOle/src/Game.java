@@ -4,21 +4,39 @@ import java.io.IOException;
 import java.util.Scanner;
 
 import stage.Stage;
-import Entity.Pokemon;
+import Entity.*;
 
 
 public class Game {
 	private Stage selectedStage;
 	private int battleScore;
 	private Pokemon playerPokemon;
-	private Stage[] stageList = {new Stage("")};
+	private Stage[] stageList;
+	
+	// should these be local variables?
+	//private Pokemon[] wildPokemons;
 	
 	public void Game() {
-		Pokemon[] stageOnePokemonList = {new Pokemon(""), new Pokemon(), new Pokemon()};
+		this.battleScore = 0;
+		
+		Pokemon[] stageOnePokemonList = {
+			new ElectricPokemon("Pikachu", 50, 7, 3, 9),
+			new GrassPokemon("Bulbasaur", 72, 4, 8, 4),
+			new WaterPokemon("Squirtle", 64, 7, 5, 6)
+		};
 		Stage pikachuStage = new Stage("Pikachu Area", stageOnePokemonList);
+		
+		//create second stage here
+		
+		//create third stage here
+		
+		//then finally, add all stages to "stageList" array variable
 	}
 	
 	public void start() {
+		System.out.println("Welcome to Pokemon GaOle! Please insert some coins to start the game.");
+		selectStageMenu();
+		
 		catchTime();
 		battleTime();
 		concludeStage();
@@ -32,28 +50,38 @@ public class Game {
 		//for (int i = 0; i<5; i++) {
 		//	System.out.printf("%d - %s", i, stageName);
 		//}
-		Stage.displayAllStages();
+		System.out.println("Oh no! We will just select a stage on ur behave (LMAO)");
+		selectedStage = stageList[0];
 	}
 	
 	public void catchTime() {
-		System.out.println("\n\n\ncatch time! choose a pokemon to catch:");
+		Pokemon[] wildPokemons = {selectedStage.generateWildPokemon(), selectedStage.generateWildPokemon()};
 		
-		for (int i = 0; i < Pokemons.length; i++) {
-			
-			System.out.println((i + 1) + " " + Pokemons[i]);
-			
+		System.out.println("\n\n\ncatch time! choose a pokemon to catch:");
+		for (int i = 0; i < wildPokemons.length; i++) {
+			System.out.printf("%d - %s", i, wildPokemons[i].getName());
 		}
-		System.out.println("GAME START");
+		
+//		for (int i = 0; i < Pokemons.length; i++) {
+//			
+//			System.out.println((i + 1) + " " + Pokemons[i]);
+//			
+//		}
+
+//		System.out.println("GAME START");
 		Scanner scanner = new Scanner(System.in);
-		System.out.println("Enter Number 1---3: ");
+		System.out.println("Enter Number 1---2: ");
 		int choice = scanner.nextInt();
 		
-		if (choice >= 1 && choice <= 3) {
-			System.out.println("you caught " + Pokemons[choice - 1] + "!");
-			
-		}  else {
-			System.out.println("invalid choice.No pokemon caught GAME OVER!");
-		}
+		//salvage this maybe?
+//		if (choice >= 1 && choice <= 3) {
+//			System.out.println("you caught " + Pokemons[choice - 1] + "!");
+//			
+//		}  else {
+//			System.out.println("invalid choice.No pokemon caught GAME OVER!");
+//		}
+		
+		
 	}
 	
 	// Executed when is time to battle pokemon

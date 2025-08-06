@@ -26,6 +26,11 @@ public class Pokemon {
 		this.speed = speed;
 	}
 	
+	// Setters and Getters
+	public String getName() {
+		return name;
+	}
+
 	//Method to deal damage to Pokemon
 	public void takeDamage(int damage) {
 		healthPoints -= damage;
