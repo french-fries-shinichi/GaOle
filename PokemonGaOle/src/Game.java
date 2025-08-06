@@ -10,8 +10,13 @@ import Entity.Pokemon;
 public class Game {
 	private Stage selectedStage;
 	private int battleScore;
-	String [] Pokemons = {"rayquaza", "jessie", "misty"};
 	private Pokemon playerPokemon;
+	private Stage[] stageList = {new Stage("")};
+	
+	public void Game() {
+		Pokemon[] stageOnePokemonList = {new Pokemon(""), new Pokemon(), new Pokemon()};
+		Stage pikachuStage = new Stage("Pikachu Area", stageOnePokemonList);
+	}
 	
 	public void start() {
 		catchTime();
@@ -24,13 +29,14 @@ public class Game {
 		
 		System.out.println("\n\n\n");
 		System.out.println("Select a stage to begin!");
-		for (int i = 0; i<5; i++) {
-			System.out.printf("%d - %s", i, stageName);
-		}
+		//for (int i = 0; i<5; i++) {
+		//	System.out.printf("%d - %s", i, stageName);
+		//}
+		Stage.displayAllStages();
 	}
 	
 	public void catchTime() {
-		System.out.println("catch time! choose a pokemon to catch:");
+		System.out.println("\n\n\ncatch time! choose a pokemon to catch:");
 		
 		for (int i = 0; i < Pokemons.length; i++) {
 			

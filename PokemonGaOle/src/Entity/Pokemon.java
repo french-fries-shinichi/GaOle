@@ -3,22 +3,23 @@ package Entity;
 public class Pokemon {
 	
 	private String name;
-	private int collectionNumber;
-	private int pokemonPE;
-	private String moveType;
+	//private int collectionNumber;
+	//private int pokemonPE;
+	//private String moveType;
 	private int healthPoints;
+	
 	private int attack;
 	private int defense;
 	private int speed;
 	
 	//Constructor Method
-	public Pokemon(String name, int collectionNumber, int pokemonPE, String moveType,
+	public Pokemon(String name,
 			int healthPoints, int attack, int defense, int speed) {
 		
 		this.name = name;
-		this.collectionNumber = collectionNumber;
-		this.pokemonPE = pokemonPE;
-		this.moveType = moveType;
+		//this.collectionNumber = collectionNumber;
+		//this.pokemonPE = pokemonPE;
+		//this.moveType = moveType;
 		this.healthPoints = healthPoints;
 		this.attack = attack;
 		this.defense = defense;

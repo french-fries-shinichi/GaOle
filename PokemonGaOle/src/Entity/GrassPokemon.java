@@ -1,7 +1,7 @@
 package Entity;
 
-public class FirePokemon extends Pokemon {
-	public FirePokemon(String name,
+public class GrassPokemon extends Pokemon {
+	public GrassPokemon(String name,
 			int healthPoints, int attack, int defense, int speed) {
 		
 		super(name, healthPoints, attack, defense, speed);
