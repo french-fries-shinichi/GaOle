@@ -1,4 +1,3 @@
-//import stage.Stage;
 import Entity.Pokemon;
 
 public class GaOle {

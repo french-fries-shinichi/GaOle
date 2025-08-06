@@ -11,15 +11,24 @@ public class Pokemon {
 	private int attack;
 	private int defense;
 	private int speed;
+	private double Effective;
+	private PokemonTypes type;
+	
+	public enum PokemonTypes {
+	    Normal, Fire, Water, Electric, Ice, Grass,
+	    Fighting, Poison, Ground, Flying, Psychic,
+	    Bug, Rock, Ghost, Dragon, Dark, Steel, Fairy
+	}
 	
 	//Constructor Method
 	public Pokemon(String name,
-			int healthPoints, int attack, int defense, int speed) {
+			int healthPoints, PokemonTypes type,  int attack, int defense, int speed) {
 		
 		this.name = name;
 		//this.collectionNumber = collectionNumber;
 		//this.pokemonPE = pokemonPE;
 		//this.moveType = moveType;
+		this.type = type;
 		this.healthPoints = healthPoints;
 		this.attack = attack;
 		this.defense = defense;
@@ -29,6 +38,14 @@ public class Pokemon {
 	// Setters and Getters
 	public String getName() {
 		return name;
+	}
+	
+	public PokemonTypes getType(){
+		return type;
+	}
+	
+	protected double getEffectiveness(PokemonTypes attackType, PokemonTypes defenderType) {
+		return 1.0;
 	}
 
 	//Method to deal damage to Pokemon
@@ -41,7 +58,8 @@ public class Pokemon {
 	 * inflict on other Pokemon
 	 */
 	public void attack(Pokemon target) {
-		int damage = this.attack - target.defense;
+		double effectiveness = getEffectiveness(this.type, target.getType());
+		int damage = (int)(this.attack * effectiveness - target.defense);
 		if (damage < 0) damage = 0;
 		target.takeDamage(damage);
 		System.out.println(this.name + " attacked " + target.name + " for " +
