@@ -1,7 +1,10 @@
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
@@ -13,7 +16,7 @@ import Entity.*;
 public class Game {
 	private Stage selectedStage;
 	private int battleScore;
-	private Pokemon[] playerPokemons = {PokemonPool.findSpecie("Charmeleon")};
+	private Pokemon[] playerPokemons = {PokemonPool.copy("Charmeleon")};
 	private ArrayList<Stage> stageList = new ArrayList<Stage>();
 	
 	// should these be local variables?
@@ -23,25 +26,25 @@ public class Game {
 		this.battleScore = 0;
 		
 		Pokemon[] pikachuStagePokemonList = {
-			new ElectricPokemon("Pikachu", 50, 7, 3, 9),
-			new GrassPokemon("Bulbasaur", 72, 4, 8, 4),
-			new WaterPokemon("Squirtle", 64, 7, 5, 6)
+			PokemonPool.copy("Pikachu"),
+			PokemonPool.copy("Bulbasaur"),
+			PokemonPool.copy("Squirtle"),
 		};
 		Stage pikachuStage = new Stage("Pikachu Area", pikachuStagePokemonList);
 		
 		//create second stage here
 		Pokemon[] eeveeStagePokemonList = {
-				new ElectricPokemon("Pikachu", 50, 7, 3, 9),
-				new GrassPokemon("Bulbasaur", 72, 4, 8, 4),
-				new WaterPokemon("Squirtle", 64, 7, 5, 6)
+				PokemonPool.copy("Pikachu"),
+				PokemonPool.copy("Bulbasaur"),
+				PokemonPool.copy("Squirtle"),
 			};
 		Stage eeveeStage = new Stage("Eevee Area", eeveeStagePokemonList);
 		
 		//create third stage here
 		Pokemon[] snorlaxStagePokemonList = {
-				new ElectricPokemon("Pikachu", 50, 7, 3, 9),
-				new GrassPokemon("Bulbasaur", 72, 4, 8, 4),
-				new WaterPokemon("Squirtle", 64, 7, 5, 6)
+				PokemonPool.copy("Pikachu"),
+				PokemonPool.copy("Bulbasaur"),
+				PokemonPool.copy("Squirtle"),
 			};
 		Stage snorlaxStage = new Stage("Snorlax Area", snorlaxStagePokemonList);
 		
@@ -201,15 +204,16 @@ public class Game {
 		
 		System.out.println("\n\n\nCatch time! A gang of wild Pokemon appears!");
 		for (int i = 0; i < wildPokemons.length; i++) {
-			System.out.printf("%d - %s\n", i, wildPokemons[i].getName());
+			System.out.printf("%d - %s\n", i+1, wildPokemons[i].getName());
 		}
 
-		System.out.println("Enter the number of the Pokemon you wanna catch: ");
+		System.out.println("Enter the number of the Pokemon you want to catch: ");
 		int choice = s.nextInt();
 		
 		//salvage this maybe?
 		if (choice >= 1 && choice <= 3) {
-			System.out.println("you caught " +wildPokemons[choice - 1] + "!");
+			// this is the "always capture" logic, in case the probability capture doesnt work
+			//System.out.println("you caught " +wildPokemons[choice - 1] + "!");
 		}  else {
 			System.out.println("invalid choice.No pokemon caught GAME OVER!");
 		}
@@ -227,15 +231,26 @@ public class Game {
 		Scanner s = new Scanner(System.in);
 		
 		System.out.println("\n\n\nTwo wild pokemon approach for battle! It's battle time!");
+		// something like: You've encountered x and x
+		// then ask player which one of his pokemon, from his collection, does he want to send
 		
-		while (!enemyPokemonList[0].isPokemonFainted() && !enemyPokemonList[1].isPokemonFainted()) {
+		while (!enemyPokemonList[0].isPokemonFainted() || !enemyPokemonList[1].isPokemonFainted()) {
+			System.out.println();
 			for (int i = 0; i<enemyPokemonList.length; i++) {
 				System.out.printf("%d - %s: %d HP\n", i+1, enemyPokemonList[i].getName(), enemyPokemonList[i].getHealthPoints());
 			}
+			// Player's turn
 			System.out.println("Choose which wild pokemon you want to attack?");
-			int choice = s.nextInt();
-			
+			System.out.printf("- with your first pokemon (%s): ", playerPokemons[0].getName());
+			int choice = s.nextInt() -1;
+			// copy the above two line and place inside if statement for second allied pokemon:
+			// place code here
 			playerPokemons[0].attack(enemyPokemonList[choice]);
+			
+			System.out.printf("1 - %s: %d HP\n", playerPokemons[0].getName(), playerPokemons[0].getHealthPoints());
+			// Wild Pokemon AI logic here
+			enemyPokemonList[0].attack(playerPokemons[0]);
+			enemyPokemonList[1].attack(playerPokemons[0]);
 		}
 		
 		
@@ -274,6 +289,10 @@ public class Game {
 			System.out.println("Attempting to create a leaderboard file");
 			try {
 				leaderboardFile.createNewFile();
+				
+				FileWriter leaderboardWriter = new FileWriter("leaderboard.txt");
+				leaderboardWriter.write("0\n0\n0\n0\n0\n");
+				leaderboardWriter.close();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -281,12 +300,34 @@ public class Game {
 		}
 		
 		// read from file and parse it into a 5-items long array
+		Scanner leaderboardReader;
+		Integer[] scoreList = {-1,-1,-1,-1,-1};
+		try {
+			leaderboardReader = new Scanner(leaderboardFile);
+			for (int i = 0; i<5; i++) {
+				scoreList[i] = Integer.parseInt(leaderboardReader.nextLine());
+			}
+			
+			// FOR DEBUGGING, RAWR!!
+			for (int i = 0; i<5; i++) { 
+				System.out.println(scoreList[i]);
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		// compare the new battle-score to see if it's a highscore
+		//
+		Arrays.sort(scoreList, Collections.reverseOrder());
 		
 		// store in a leaderboard file
 		try {
 			FileWriter leaderboardWriter = new FileWriter("leaderboard.txt");
-			leaderboardWriter.write(String.format("%d", battleScore));
+			for (int i = 0; i<scoreList.length; i++) {
+				leaderboardWriter.write(String.format("%d\n", scoreList[i]));
+			}
 			leaderboardWriter.close();
+			System.out.println("File has been updated, and closed!");
 		} catch (IOException e) {
 			System.out.println("An error has occured related to the file!");
 			e.printStackTrace();

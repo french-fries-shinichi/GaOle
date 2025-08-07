@@ -1,25 +1,17 @@
 package item;
-import Entity.Pokemon;
-
-// DEPRECATED, DO NOT USE!!
 
 public class Pokeball {
-	private Pokemon capturedPokemon;
-	private String pokeballType;
-	
-	
-	public Pokemon getCapturedPokemon() {
-		return capturedPokemon;
+	private double probabilityMultiplier;
+
+	public Pokeball() {
+		this.probabilityMultiplier = 1.0;
 	}
-	public void setCapturedPokemon(Pokemon capturedPokemon) {
-		this.capturedPokemon = capturedPokemon;
+
+	public double getProbabilityMultiplier() {
+		return probabilityMultiplier;
 	}
-	public String getPokeballType() {
-		return pokeballType;
-	}
-	public void setPokeballType(String pokeballType) {
-		if (pokeballType == "Normal" || pokeballType == "Master") {
-			this.pokeballType = pokeballType;
-		}
+
+	protected void setProbabilityMultiplier(double probabilityMultiplier) {
+		this.probabilityMultiplier = probabilityMultiplier;
 	}
 }

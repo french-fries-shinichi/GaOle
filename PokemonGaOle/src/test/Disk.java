@@ -1,3 +1,4 @@
+package test;
 import Entity.Pokemon;
 
 public class Disk {

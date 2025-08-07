@@ -34,6 +34,14 @@ public class Pokemon {
 		this.defense = defense;
 		this.speed = speed;
 	}
+	public Pokemon(Pokemon no) {
+		this.name = no.getName();
+		this.type = no.getType();
+		this.healthPoints = no.getHealthPoints();
+		this.attack = no.getAttack();
+		this.defense = no.getDefense();
+		this.speed = no.getSpeed();
+	}
 	
 	// Setters and Getters
 	public String getName() {
@@ -50,6 +58,16 @@ public class Pokemon {
 
 	public int getHealthPoints() {
 		return healthPoints;
+	}
+	
+	protected int getAttack() {
+		return attack;
+	}
+	protected int getDefense() {
+		return defense;
+	}
+	protected int getSpeed() {
+		return speed;
 	}
 
 	//Method to deal damage to Pokemon

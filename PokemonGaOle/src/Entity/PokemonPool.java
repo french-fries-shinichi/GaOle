@@ -22,15 +22,17 @@ public class PokemonPool {
 //			"Charmeleon", "Charizard", "Squirtle", "Wartortle",
 //	};
 	public static Pokemon[] pokemonSpecies = {
-			new GrassPokemon("Bulbasaur", 0, 0, 0, 0),
+			new GrassPokemon("Bulbasaur", 72, 4, 8, 4),
 			new FirePokemon("Charmeleon", 10, 10, 10, 10),
-			new ElectricPokemon("Pikachu", 50, 7, 3, 9)
+			new ElectricPokemon("Pikachu", 50, 7, 3, 9),
+			new WaterPokemon("Squirtle", 64, 7, 5, 6),
+			new NormalPokemon("Eevee", 100, 10, 30, 60)
 	};
 	
-	public static Pokemon findSpecie(String specie) {
+	public static Pokemon copy(String specie) {
 		for (Pokemon x : pokemonSpecies) {
 			if (x.getName() == specie) {
-				return x;
+				return new Pokemon(x);
 			}
 		}
 		
