@@ -59,7 +59,7 @@ public class Pokemon {
 	 */
 	public void attack(Pokemon target) {
 		double effectiveness = getEffectiveness(this.type, target.getType());
-		int damage = (int)(this.attack * effectiveness - target.defense);
+		int damage = (int)((this.attack - target.defense)*effectiveness);
 		if (damage < 0) damage = 0;
 		target.takeDamage(damage);
 		System.out.println(this.name + " attacked " + target.name + " for " +

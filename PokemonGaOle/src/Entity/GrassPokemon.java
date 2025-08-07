@@ -7,7 +7,7 @@ public class GrassPokemon extends Pokemon {
 		super(name, healthPoints, PokemonTypes.Grass, attack, defense, speed);
 	}
 	
-	@Override 
+	//Calculates the effectiveness of a Pokemon's move
 	public double getEffectiveness(PokemonTypes attackType, PokemonTypes defenderType) {
 		double effectiveness = 1.0;
 		

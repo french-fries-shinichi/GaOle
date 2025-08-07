@@ -117,7 +117,7 @@ public class Game {
 			// During catch time...
 			while (isPokemonStage) {
 				try {
-					System.out.print("Would you like to proceed to catch time? (1 for YES/ 0 for NO): ");
+					System.out.print("Would you like to proceed to catch time? (1 for YES/ 0 to QUIT): ");
 					num = input.nextInt();
 					System.out.println("");
 
@@ -125,19 +125,17 @@ public class Game {
 					while (num != 0) {
 						boolean isLimit = false;
 						if (num == 1) {
-							Game initiate = new Game();
-							initiate.start(); // Starts catch time
+							start(); // Starts catch time
 							break;
 						} else {
 							isLimit = false;
 						} // end input check
 
-						if (isLimit == false) {
-							System.out.print("Please enter a valid number from 1-3!: ");
+						if (!isLimit) {
+							System.out.print("Please enter a valid number (1 - YES, 0 - QUIT): ");
 							num = input.nextInt();
 							if (num == 1) {
-								Game initiate = new Game();
-								initiate.start(); // Starts catch time
+								start(); // Starts catch time
 								isLimit = false;
 								break;
 							}
@@ -145,13 +143,15 @@ public class Game {
 					} // end while num
 
 					if (num == 0) {
-						System.out.print("Are you sure you want to skip? Enter \"YES\" to proceed: ");
+						System.out.print("Are you sure you want to quit? Enter \"YES\" to proceed: ");
 						proceed = input.next();
 						if (proceed.equals("YES")) {
-							System.out.println("Catch Time skipped! Proceeding to battle time...\n");
+							System.out.println("Quiting game...\n");
+							concludeStage();
 						} else if (proceed.matches("\\d+")) { // Check if 'proceed' contains only digits (a number)
 							System.out.println(
 									"Error: Invalid input! You cannot enter a number. Please enter \"YES\" to proceed.");
+							throw new IllegalArgumentException("");
 						} else {
 							throw new IllegalArgumentException("");
 						}
@@ -165,10 +165,6 @@ public class Game {
 					input.nextLine();
 				}
 			} // end while
-
-			// During battle time
-
-			// During conclude stage
 		}
 	
 	public void selectStageMenu() {
@@ -180,6 +176,7 @@ public class Game {
 		//}
 		System.out.println("Oh no! We will just select a stage on ur behave (LMAO)");
 		selectedStage = stageList.get(0);
+		stageList.getFirst();
 	}
 	
 	public void catchTime() {
