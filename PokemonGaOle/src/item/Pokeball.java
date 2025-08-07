@@ -1,3 +1,4 @@
+package item;
 import Entity.Pokemon;
 
 // DEPRECATED, DO NOT USE!!

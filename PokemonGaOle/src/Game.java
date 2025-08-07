@@ -22,24 +22,40 @@ public class Game {
 	public Game() {
 		this.battleScore = 0;
 		
-		Pokemon[] stageOnePokemonList = {
+		Pokemon[] pikachuStagePokemonList = {
 			new ElectricPokemon("Pikachu", 50, 7, 3, 9),
 			new GrassPokemon("Bulbasaur", 72, 4, 8, 4),
 			new WaterPokemon("Squirtle", 64, 7, 5, 6)
 		};
-		Stage pikachuStage = new Stage("Pikachu Area", stageOnePokemonList);
+		Stage pikachuStage = new Stage("Pikachu Area", pikachuStagePokemonList);
 		
 		//create second stage here
+		Pokemon[] eeveeStagePokemonList = {
+				new ElectricPokemon("Pikachu", 50, 7, 3, 9),
+				new GrassPokemon("Bulbasaur", 72, 4, 8, 4),
+				new WaterPokemon("Squirtle", 64, 7, 5, 6)
+			};
+		Stage eeveeStage = new Stage("Eevee Area", eeveeStagePokemonList);
 		
 		//create third stage here
+		Pokemon[] snorlaxStagePokemonList = {
+				new ElectricPokemon("Pikachu", 50, 7, 3, 9),
+				new GrassPokemon("Bulbasaur", 72, 4, 8, 4),
+				new WaterPokemon("Squirtle", 64, 7, 5, 6)
+			};
+		Stage snorlaxStage = new Stage("Snorlax Area", snorlaxStagePokemonList);
 		
 		//then finally, add all stages to "stageList" array variable
 		stageList.add(pikachuStage);
-		System.out.printf("%s", stageList.getFirst());
+		stageList.add(eeveeStage);
+		stageList.add(snorlaxStage);
+		
+		//this is just to test if it works
+		//System.out.printf("%s", stageList.getFirst());
 	}
 	
 	public void start() {
-		System.out.println("Welcome to Pokemon GaOle! Please insert some coins to start the game.");
+		//System.out.println("Welcome to Pokemon GaOle! Please insert some coins to start the game.");
 		selectStageMenu();
 		
 		catchTime();
@@ -168,23 +184,26 @@ public class Game {
 		}
 	
 	public void selectStageMenu() {
+		Scanner s = new Scanner(System.in);
 		
 		System.out.println("\n\n\n");
 		System.out.println("Select a stage to begin!");
-		//for (int i = 0; i<5; i++) {
-		//	System.out.printf("%d - %s", i, stageName);
-		//}
-		System.out.println("Oh no! We will just select a stage on ur behave (LMAO)");
-		selectedStage = stageList.get(0);
-		stageList.getFirst();
+		for (int i = 0; i<stageList.size(); i++) {
+			System.out.printf("%d - %s\n", i + 1, stageList.get(i).getStageName());
+		}
+		System.out.println("Choose any of the stages from the list above:");
+		int choice = s.nextInt() - 1;
+		selectedStage = stageList.get(choice);
+		
+		s.close();
 	}
 	
 	public void catchTime() {
 		Pokemon[] wildPokemons = {selectedStage.generateWildPokemon(), selectedStage.generateWildPokemon(), selectedStage.generateWildPokemon()};
 		
-		System.out.println("\n\n\ncatch time! choose a pokemon to catch:");
+		System.out.println("\n\n\nCatch time! A gang of wild Pokemon appears!");
 		for (int i = 0; i < wildPokemons.length; i++) {
-			System.out.printf("%d - %s", i, wildPokemons[i].getName());
+			System.out.printf("%d - %s\n", i, wildPokemons[i].getName());
 		}
 		
 //		for (int i = 0; i < Pokemons.length; i++) {
@@ -195,7 +214,7 @@ public class Game {
 
 //		System.out.println("GAME START");
 		Scanner scanner = new Scanner(System.in);
-		System.out.println("Enter Number 1---3: ");
+		System.out.println("Enter the number of the Pokemon you wanna catch: ");
 		int choice = scanner.nextInt();
 		
 		//salvage this maybe?
@@ -205,7 +224,7 @@ public class Game {
 			System.out.println("invalid choice.No pokemon caught GAME OVER!");
 		}
 		
-		
+		scanner.close();
 	}
 	
 	// Executed when is time to battle pokemon
