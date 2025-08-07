@@ -8,7 +8,7 @@ public class GaOle {
 		Game newGame = new Game(); // currently undefined
 		Pokemon playerData;
 
-		newGame.initiateStage();
-		//newGame.start();
+		//newGame.initiateStage();
+		newGame.start();
 	}
 }

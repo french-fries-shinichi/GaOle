@@ -194,28 +194,19 @@ public class Game {
 		System.out.println("Choose any of the stages from the list above:");
 		int choice = s.nextInt() - 1;
 		selectedStage = stageList.get(choice);
-		
-		s.close();
 	}
 	
 	public void catchTime() {
+		Scanner s = new Scanner(System.in);
 		Pokemon[] wildPokemons = {selectedStage.generateWildPokemon(), selectedStage.generateWildPokemon(), selectedStage.generateWildPokemon()};
 		
 		System.out.println("\n\n\nCatch time! A gang of wild Pokemon appears!");
 		for (int i = 0; i < wildPokemons.length; i++) {
 			System.out.printf("%d - %s\n", i, wildPokemons[i].getName());
 		}
-		
-//		for (int i = 0; i < Pokemons.length; i++) {
-//			
-//			System.out.println((i + 1) + " " + Pokemons[i]);
-//			
-//		}
 
-//		System.out.println("GAME START");
-		Scanner scanner = new Scanner(System.in);
 		System.out.println("Enter the number of the Pokemon you wanna catch: ");
-		int choice = scanner.nextInt();
+		int choice = s.nextInt();
 		
 		//salvage this maybe?
 		if (choice >= 1 && choice <= 3) {
@@ -223,8 +214,6 @@ public class Game {
 		}  else {
 			System.out.println("invalid choice.No pokemon caught GAME OVER!");
 		}
-		
-		scanner.close();
 	}
 	
 	// Executed when is time to battle pokemon
@@ -367,7 +356,7 @@ public class Game {
 		
 		// store in a leaderboard file
 		try {
-			FileWriter leaderboardWriter = new FileWriter("filename.txt");
+			FileWriter leaderboardWriter = new FileWriter("leaderboard.txt");
 			leaderboardWriter.write(String.format("%d", battleScore));
 			leaderboardWriter.close();
 		} catch (IOException e) {
