@@ -13,7 +13,7 @@ import Entity.*;
 public class Game {
 	private Stage selectedStage;
 	private int battleScore;
-	private Pokemon[] playerPokemons;
+	private Pokemon[] playerPokemons = {PokemonPool.findSpecie("Charmeleon")};
 	private ArrayList<Stage> stageList = new ArrayList<Stage>();
 	
 	// should these be local variables?
@@ -58,10 +58,9 @@ public class Game {
 		//System.out.println("Welcome to Pokemon GaOle! Please insert some coins to start the game.");
 		selectStageMenu();
 		
-		catchTime();
+		//catchTime();
 		battleTime();
-		concludeStage();
-		// 
+		//concludeStage(); 
 	}
 	
 	// Initializes the stage logic and dialogue
@@ -218,99 +217,28 @@ public class Game {
 	
 	// Executed when is time to battle pokemon
 	public void battleTime() {
-		/*
-		 * Pokemon(String name, int collectionNumber, int pokemonPE, String pokemonType,
-		 * String moveType, int healthPoints, int attack, int defense, int speed)
-		 */
-
 		// Set the stage for the two Pokemons and display their types and affinities
 		//Pokemon playerPokemon = new Pokemon("eevee", 2, 100, 10, 30, 60);
 		//Pokemon enemyTarget = new Pokemon("Bulbasaur", 100, 10, 40, 67);
-		Pokemon enemyPokemonOne = selectedStage.generateWildPokemon();
-		Pokemon enemyPokemonTwo = selectedStage.generateWildPokemon();
-		//			System.out.printf("Types and affinity of player's pokemon is: %s and %s", playerPokemon.PokemonTypeString(),
-		//					playerPokemon.PokemonAffinityString());
-		//			System.out.printf("Types and affinity of enemy pokemon is: %s with %s", enemyTarget.PokemonTypeString(),
-		//					enemyTarget.PokemonAffinityString());
-
-		// Player sends in the pokemon of their choice
-		Scanner input = new Scanner(System.in);
-		System.out.println("Which pokemon would you like to send? (Enter '0' to quit)");
-		int sentPokemon;
-		sentPokemon = input.nextInt();
-		for (Pokemon a : playerPokemons) {
-			if (a.equals(sentPokemon)) {
-				System.out.printf("Sending %s in...", sentPokemon);
+		Pokemon enemyPokemonList[] = {
+			selectedStage.generateWildPokemon(),
+			selectedStage.generateWildPokemon()
+		};
+		Scanner s = new Scanner(System.in);
+		
+		System.out.println("\n\n\nTwo wild pokemon approach for battle! It's battle time!");
+		
+		while (!enemyPokemonList[0].isPokemonFainted() && !enemyPokemonList[1].isPokemonFainted()) {
+			for (int i = 0; i<enemyPokemonList.length; i++) {
+				System.out.printf("%d - %s: %d HP\n", i+1, enemyPokemonList[i].getName(), enemyPokemonList[i].getHealthPoints());
 			}
+			System.out.println("Choose which wild pokemon you want to attack?");
+			int choice = s.nextInt();
+			
+			playerPokemons[0].attack(enemyPokemonList[choice]);
 		}
-
-		// Battle logic : as player sends pokemon...
-		//			while (sentPokemon != 0) {
-		//				while (enemyTarget.healthPoints != 0 || playerPokemon.healthPoints != 0) {
-		//					System.out.println("What would you like to do?");
-		//					System.out.println("Attack or Defend");
-		//					String playerDecision = input.next();
-		//					if (playerDecision == "Attack") {
-		//						playerPokemon.attack(enemyTarget);
-		//						System.out.println("It was very effective!");
-		//					} else if (playerDecision == "Defend") {
-		//						enemyTarget.attack(playerPokemon);
-		//					}
-		//
-		//					if (enemyTarget.healthPoints == 0) {
-		//						System.out.printf("%s has won!", enemyTarget);
-		//						break;
-		//					}
-		//
-		//					if (playerPokemon.healthPoints == 0) {
-		//						System.out.printf("%s has won!", playerPokemon);
-		//						break;
-		//					}
-		//				}
-		//			}
-
-		//			Pokemon playerPokemon = new Pokemon();
-		//			Pokemon enemyTarget = new Pokemon();
-		//			while (sentPokemon != 0) {
-		//				while (enemyTarget.healthPoints != 0 || playerPokemon.healthPoints != 0) {
-		//					System.out.println("What would you like to do?");
-		//					System.out.println("Attack or Defend");
-		//					String playerDecision = input.next();
-		//					
-		//					if (playerDecision == "Attack") {
-		//						playerPokemon.attack(enemyTarget);
-		//						System.out.println("It was very effective!");
-		//					} else if (playerDecision == "Defend") {
-		//						enemyTarget.attack(playerPokemon);
-		//					}
-		//
-		//					if (enemyTarget.healthPoints == 0) {
-		//						System.out.printf("%s has won!", enemyTarget);
-		//						break;
-		//					}
-		//
-		//					if (playerPokemon.healthPoints == 0) {
-		//						System.out.printf("%s has won!", playerPokemon);
-		//						break;
-		//					}
-		//				}
-		//			}
-
-		//			boolean continueBattle = true;
-		//			while (continueBattle) {
-		//				for (Pokemon p : playerPokemons) {
-		//					p.attack(enemyPokemonOne);
-		//				}
-		//				
-		//				// this should ideally be a for-loop
-		//				enemyPokemonOne.attack(playerPokemons[0]);
-		//				enemyPokemonTwo.attack(playerPokemons[1]);
-		//				
-		//				// here check whether the player can continue fighting or not
-		//				// hint: two different conditions to be checked...
-		//			}
-
-
+		
+		
 		// Prompt a 50% chance for an extra battle
 		Random random = new Random();
 		double randomChance = random.nextDouble();

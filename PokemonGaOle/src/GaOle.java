@@ -6,6 +6,7 @@ public class GaOle {
 		// TODO Auto-generated method stub
 
 		Game newGame = new Game(); // currently undefined
+		UserSave playerDisk = new UserSave("PlayerOne");
 		Pokemon playerData;
 
 		//newGame.initiateStage();

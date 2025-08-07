@@ -48,6 +48,10 @@ public class Pokemon {
 		return 1.0;
 	}
 
+	public int getHealthPoints() {
+		return healthPoints;
+	}
+
 	//Method to deal damage to Pokemon
 	public void takeDamage(int damage) {
 		healthPoints -= damage;
@@ -64,5 +68,14 @@ public class Pokemon {
 		target.takeDamage(damage);
 		System.out.println(this.name + " attacked " + target.name + " for " +
 		damage + " damage!");
+	}
+	
+	public boolean isPokemonFainted() {
+		if (getHealthPoints() <= 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 }
