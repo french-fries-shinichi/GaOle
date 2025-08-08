@@ -108,6 +108,6 @@ public class Stage { // declare attributes
 	// I couldnt decide whether to use "toString" or static "displayAllStages" for my menu...
 	
 	public String toString() {
-		return String.format("%s %s)", getStageName(), getLikelyPokemons());
+		return String.format("%s %s", getStageName(), getLikelyPokemons());
 	}
 }

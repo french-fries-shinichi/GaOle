@@ -74,7 +74,7 @@ public class Pokemon {
 	public void takeDamage(int damage) {
 		healthPoints -= damage;
 		if (damage < 0) {healthPoints = 0;}
-		if (damage > healthPoints) {healthPoints = 0;}
+		if (damage >= healthPoints) {healthPoints = 0;}
 	}
 	
 	/*Method used to measure the damage to

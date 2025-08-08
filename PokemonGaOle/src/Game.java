@@ -71,40 +71,47 @@ public class Game {
 		concludeStage();
 	}
 	
-	// Initializes the stage logic and dialogue
-		public void initiateStage() {
-			int num;
-			int credits;
-			int count = 1;
-			int Continue;
-			boolean startStage = true;
-			boolean isPokemonStage = true;
-			String proceed = "";
+	public void initiateStage() {
+		// Initializes the stage start
+		int num;
+		int credits;
+		int count = 1;
+		int Continue;
+		boolean startStage = true;
+		boolean isPokemonStage = true;
+		boolean isSatisfied = true;
+		String proceed = "";
 
-			// All logic of connecting stages will go in here
-			// basically before triggering catchTime
+		// All logic of connecting stages will go in here
+		// basically before triggering catchTime
 
-			Scanner input = new Scanner(System.in);
+		Scanner input = new Scanner(System.in);
 
-			// Stage start
+		// Stage start
+		while (isSatisfied) {
 			while (startStage) {
 				try {
-					System.out.println("Welcome to Pokemon GaOle! Please insert some coins to start the game.");
+					// Start the stage dialogue
+					System.out.println("\n\nWelcome to Pokemon GaOle! Please insert some coins to start the game.");
 					System.out.println("You will need 8 coins to start the game\n");
 					System.out.print("Enter '1' to insert credits: ");
 					credits = input.nextInt();
 
+					// Entering '1' starts the game
 					if (credits != 1) {
 						System.out.println("You must enter '1' to insert a coin.\n");
 						continue;
 					}
 
+					// Increment count for every credit inserted into the machine
+					// Print back the amount of credits each time back to the player
 					while (count < 9) {
 						System.out.printf("You have inserted %s coins! ", count);
 						System.out.println("Enter STOP to end game");
 						System.out.print("Would you like to continue? (Enter '1'): ");
 						Continue = input.nextInt();
 
+						// Skips condition if exit if input is not '1'
 						if (Continue != 1) {
 							System.out.println("You must enter '1' to continue.");
 							continue;
@@ -117,17 +124,14 @@ public class Game {
 								break;
 							}
 						}
-						count++;
+						count++; // Increment the count of the credits printed
 					}
 
 					if (!startStage) {
 						System.out.print("You have inserted 8 coins!\n");
 						System.out.println("Thank you. Get ready for Battle and Catch, good luck!\n");
 						break;
-					}
-
-					break;
-
+					} // end if !startStage
 				} catch (InputMismatchException e) {
 					System.out.println("Input does not match your intended action! Please try again.\n");
 					input.nextLine();
@@ -135,20 +139,21 @@ public class Game {
 					System.out.println("An error occured. Please try again.\n");
 					input.nextLine();
 				}
+				break;
 			} // end while
 
-			// During catch time...
+			// A while loop to run start() method and validate input
 			while (isPokemonStage) {
 				try {
 					System.out.print("Would you like to proceed to catch time? (1 for YES/ 0 to QUIT): ");
 					num = input.nextInt();
 					System.out.println("");
 
-					// CatchTime trigger
+					// Trigger to run the battle modes
+					boolean isLimit = false;
 					while (num != 0) {
-						boolean isLimit = false;
 						if (num == 1) {
-							start(); // Starts catch time
+							isSatisfied = false;
 							break;
 						} else {
 							isLimit = false;
@@ -158,8 +163,7 @@ public class Game {
 							System.out.print("Please enter a valid number (1 - YES, 0 - QUIT): ");
 							num = input.nextInt();
 							if (num == 1) {
-								start(); // Starts catch time
-								isLimit = false;
+								isSatisfied = false;
 								break;
 							}
 						} // end retry variable
@@ -179,7 +183,9 @@ public class Game {
 							throw new IllegalArgumentException("");
 						}
 					}
+
 					break;
+
 				} catch (InputMismatchException e) {
 					System.out.println("Input does not match your intended action! Please try again.\n");
 					input.nextLine();
@@ -189,6 +195,11 @@ public class Game {
 				}
 			} // end while
 		}
+
+		if (!isSatisfied) {
+			start();
+		}
+	}
 	
 	public void initiatePlayerPokemons(ArrayList<Pokemon> playerPokemons) {
 		if (playerPokemons.size() == 0) {

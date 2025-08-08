@@ -11,8 +11,9 @@ public class GaOle {
 		ArrayList<Pokemon> playerPokemons = new ArrayList<Pokemon>();
 		
 		//UserSave playerDisk = new UserSave("PlayerOne"); //delete if not gonna use
-		//newGame.initiateStage();
-		//newGame.initiatePlayerPokemons(playerPokemons);
+		newGame.initiatePlayerPokemons(playerPokemons);
+		newGame.initiateStage();
+		
 		//newGame.start();
 	}
 }

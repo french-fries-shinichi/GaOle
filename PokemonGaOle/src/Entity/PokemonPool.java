@@ -21,7 +21,7 @@ public class PokemonPool {
 //			"Bulbasaur", "Ivysaur", "Venusaur", "Charmander",
 //			"Charmeleon", "Charizard", "Squirtle", "Wartortle",
 //	};
-	public static Pokemon[] pokemonSpecies = {
+	private static Pokemon[] pokemonSpecies = {
 			new GrassPokemon("Bulbasaur", 72, 4, 8, 4),
 			new FirePokemon("Charmeleon", 10, 10, 10, 10),
 			new ElectricPokemon("Pikachu", 50, 7, 3, 9),
