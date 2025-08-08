@@ -31,22 +31,30 @@ public class Game {
 			PokemonPool.copy("Pikachu"),
 			PokemonPool.copy("Bulbasaur"),
 			PokemonPool.copy("Squirtle"),
+			PokemonPool.copy("Dialga"),
+			PokemonPool.copy("Lucario")
+			
 		};
 		Stage pikachuStage = new Stage("Pikachu Area", pikachuStagePokemonList);
 		
 		//create second stage here
 		Pokemon[] eeveeStagePokemonList = {
-				PokemonPool.copy("Pikachu"),
-				PokemonPool.copy("Bulbasaur"),
+				PokemonPool.copy("Eevee"),
+				PokemonPool.copy("Charmeleon"),
 				PokemonPool.copy("Squirtle"),
+				PokemonPool.copy("Rayquaza"),
+				PokemonPool.copy("Mew"),
+				PokemonPool.copy("Diancie")
 			};
 		Stage eeveeStage = new Stage("Eevee Area", eeveeStagePokemonList);
 		
 		//create third stage here
 		Pokemon[] snorlaxStagePokemonList = {
-				PokemonPool.copy("Pikachu"),
-				PokemonPool.copy("Bulbasaur"),
-				PokemonPool.copy("Squirtle"),
+				PokemonPool.copy("Snorlax"),
+				PokemonPool.copy("Darkrai"),
+				PokemonPool.copy("Articuno"),
+				PokemonPool.copy("Mimikyu"),
+				PokemonPool.copy("Tyranitar")
 			};
 		Stage snorlaxStage = new Stage("Snorlax Area", snorlaxStagePokemonList);
 		
@@ -201,15 +209,15 @@ public class Game {
 		}
 	}
 	
-	public void initiatePlayerPokemons(ArrayList<Pokemon> playerPokemons) {
-		if (playerPokemons.size() == 0) {
-			System.out.println("Oh no, you don't have any Pokemons!");
-			System.out.println("Here, take a Bulbasaur!");
-			playerPokemons.add(PokemonPool.copy("Bulbasaur"));
-		} else {
-			this.playerPokemons = playerPokemons;
-		}
-	}
+//	public void initiatePlayerPokemons(ArrayList<Pokemon> playerPokemons) {
+//		if (playerPokemons.size() == 0) {
+//			System.out.println("Oh no, you don't have any Pokemons!");
+//			System.out.println("Here, take a Bulbasaur!");
+//			playerPokemons.add(PokemonPool.copy("Bulbasaur"));
+//		} else {
+//			this.playerPokemons = playerPokemons;
+//		}
+//	}
 	
 	public void selectStageMenu() {
 		Scanner s = new Scanner(System.in);
@@ -255,79 +263,66 @@ public class Game {
 		}
 	}
 	
-	// Executed when is time to battle pokemon
 	public void battleTime() {
-		// Set the stage for the two Pokemons and display their types and affinities
-		//Pokemon playerPokemon = new Pokemon("eevee", 2, 100, 10, 30, 60);
-		//Pokemon enemyTarget = new Pokemon("Bulbasaur", 100, 10, 40, 67);
-		Pokemon enemyPokemonList[] = {
-			selectedStage.generateWildPokemon(),
-			selectedStage.generateWildPokemon()
-		};
-		Scanner s = new Scanner(System.in);
-		
-		// calculate battle score
-		for (int i = 0; i<enemyPokemonList.length; i++) {
-			battleScore += enemyPokemonList[i].getHealthPoints();
-		}
-		
-		System.out.println("\n\n\nTwo wild pokemon approach for battle! It's battle time!");
-		System.out.printf("You've encountered a wild %s and %s !\n", enemyPokemonList[0].getName(), enemyPokemonList[1].getName());
-		
-		// then ask player which one of his pokemon, from his collection, does he want to send
-		System.out.println("You have the following Pokemon:");
-		for (int i = 0; i<playerPokemons.size(); i++) {
-			System.out.printf("%d - %s: %d HP\n", i+1, playerPokemons.get(i).getName(), playerPokemons.get(i).getHealthPoints());
-		}
-		System.out.println("Which one do you want to send?\nFor your first Pokemon:");
-		int choiceOne = s.nextInt()-1;
-		System.out.println("For your second Pokemon:");
-		int choiceTwo = s.nextInt()-1;
-		Pokemon[] alliedPokemonList = {playerPokemons.get(choiceOne), playerPokemons.get(choiceTwo)};
-		
-		
-		while (!enemyPokemonList[0].isPokemonFainted() || !enemyPokemonList[1].isPokemonFainted()) {
-			System.out.println();
-			System.out.println("== Player's Turn! ==\nWild Pokemon health:");
-			for (int i = 0; i<enemyPokemonList.length; i++) {
-				System.out.printf("%d - %s: %d HP\n", i+1, enemyPokemonList[i].getName(), enemyPokemonList[i].getHealthPoints());
-			}
-			// Player's turn
-			System.out.println("Choose which wild pokemon you want to attack?");
-			System.out.printf("- with your first pokemon (%s): ", playerPokemons.get(0).getName());
-			if (playerPokemons.size() > 1) {
-				System.out.printf("\n- with your second pokemon (%s): ", playerPokemons.get(1).getName());
-			}
-			int choice = s.nextInt() -1;
-			// copy the above two line and place inside if statement for second allied pokemon:
-			// place code here
-			playerPokemons.get(0).attack(enemyPokemonList[choice]);
-			
-			for (int i = 0; i<alliedPokemonList.length; i++) {
-				System.out.printf("%d - %s: %d HP\n", i+1, alliedPokemonList[i].getName(), alliedPokemonList[i].getHealthPoints());
-			}
+	    Pokemon[] enemyPokemonList = {
+	        selectedStage.generateWildPokemon(),
+	        selectedStage.generateWildPokemon()
+	    };
 
-			// Wild Pokemon Turn
-			enemyPokemonList[0].attack(playerPokemons.get(0));
-			enemyPokemonList[1].attack(playerPokemons.get(1));
+	    Scanner s = new Scanner(System.in);
+
+	    for (Pokemon p : enemyPokemonList) {
+	        battleScore += p.getHealthPoints();
+	    }
+
+	    System.out.println("\n\n\nTwo wild pokemon approach for battle! It's battle time!");
+	    System.out.printf("You've encountered a wild %s and %s!\n", enemyPokemonList[0].getName(), enemyPokemonList[1].getName());
+
+	    if (playerPokemons.size() < 2) {
+			System.out.println("Oh no, you don't have any Pokemons!");
+			System.out.println("Here, take a Bulbasaur!");
+			playerPokemons.add(PokemonPool.copy("Bulbasaur"));
+			if (playerPokemons.size() < 2) {
+				System.out.println("Looks like you don't have enough pokemons, here's a free second Pokemon!");
+				playerPokemons.add(PokemonPool.copy("Snorlax"));
+			}
 		}
-		
-		
-		// Prompt a 50% chance for an extra battle
-//		Random random = new Random();
-//		double randomChance = random.nextDouble();
-//		if (randomChance >= 0.0 && randomChance <= 0.5) {
-//			extraBattle(); // depart for extra battle
-//		} else {
-//			concludeStage(); // 50% to conclude the stage
-//		}
+	    System.out.println("You have the following Pokemon:");
+	    for (int i = 0; i < playerPokemons.size(); i++) {
+	        System.out.printf("%d - %s: %d HP\n", i + 1, playerPokemons.get(i).getName(), playerPokemons.get(i).getHealthPoints());
+	    }
 
-		// Battle Time!:
-		// generate two wild pokemon, then display their type and affinities
-		// with the departForBattle method, then ask player which one of their
-		// pokemon would they like to send.
-		// (this section is handled by the departForBattle() method)
+	    System.out.println("Which one do you want to send?\nFor your first Pokemon:");
+	    int choiceOne = s.nextInt() - 1;
+	    System.out.println("For your second Pokemon:");
+	    int choiceTwo = s.nextInt() - 1;
 
+	    Pokemon[] alliedPokemonList = {
+	        playerPokemons.get(choiceOne),
+	        playerPokemons.get(choiceTwo)
+	    };
+
+	    while (!enemyPokemonList[0].isPokemonFainted() && !enemyPokemonList[1].isPokemonFainted()) {
+	        System.out.println("\n== Player's Turn! ==\nWild Pokemon health:");
+	        for (int i = 0; i < enemyPokemonList.length; i++) {
+	            System.out.printf("%d - %s: %d HP\n", i + 1, enemyPokemonList[i].getName(), enemyPokemonList[i].getHealthPoints());
+	        }
+
+	        for (int i = 0; i < alliedPokemonList.length; i++) {
+	            System.out.printf("Choose which wild pokemon %s should attack: ", alliedPokemonList[i].getName());
+	            int target = s.nextInt() - 1;
+	            alliedPokemonList[i].attack(enemyPokemonList[target]);
+	        }
+
+	        for (int i = 0; i < alliedPokemonList.length; i++) {
+	            System.out.printf("%d - %s: %d HP\n", i + 1, alliedPokemonList[i].getName(), alliedPokemonList[i].getHealthPoints());
+	        }
+
+	        System.out.println("== Enemy's Turn! ==");
+	        for (int i = 0; i < enemyPokemonList.length; i++) {
+	            enemyPokemonList[i].attack(alliedPokemonList[i % alliedPokemonList.length]);
+	        }
+	    }
 	}
 	
 	// FOR DEBUGGING PURPOSES!
@@ -383,7 +378,7 @@ public class Game {
 				break;
 			}
 		}
-		if (overwrite = true) {
+		if (overwrite == true) {
 			scoreList[4] = battleScore;
 			Arrays.sort(scoreList, Collections.reverseOrder());
 		}
@@ -391,16 +386,17 @@ public class Game {
 		// store in a leaderboard file
 		try {
 			FileWriter leaderboardWriter = new FileWriter("leaderboard.txt");
+			leaderboardWriter.close();
+			// display the results
+			System.out.println("Leaderboard!");
 			for (int i = 0; i<scoreList.length; i++) {
 				leaderboardWriter.write(String.format("%d\n", scoreList[i]));
 			}
-			leaderboardWriter.close();
-			System.out.println("File has been updated, and closed!");
 		} catch (IOException e) {
 			System.out.println("An error has occured related to the file!");
 			e.printStackTrace();
 		}
 		
-		// display the results
+		
 	}
 }

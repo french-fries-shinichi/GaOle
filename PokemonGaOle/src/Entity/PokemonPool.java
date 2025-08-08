@@ -27,6 +27,7 @@ public class PokemonPool {
 			new GrassPokemon("Bulbasaur", 80, 80, 75, 55),
 			new ElectricPokemon("Pikachu", 60, 80, 70, 100),
 			new NormalPokemon("Eevee", 70, 75, 95, 75),
+			new NormalPokemon("Snorlax", 120, 70, 80, 30),
 			new PsychicPokemon("Mew", 100, 100, 100, 100),
 			new DarkPokemon("Darkrai", 70, 90, 90, 125),
 			new SteelPokemon("Dialga", 100, 120, 120, 90),
