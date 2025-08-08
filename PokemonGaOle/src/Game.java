@@ -314,13 +314,13 @@ public class Game {
 		
 		
 		// Prompt a 50% chance for an extra battle
-		Random random = new Random();
-		double randomChance = random.nextDouble();
-		if (randomChance >= 0.0 && randomChance <= 0.5) {
-			extraBattle(); // depart for extra battle
-		} else {
-			concludeStage(); // 50% to conclude the stage
-		}
+//		Random random = new Random();
+//		double randomChance = random.nextDouble();
+//		if (randomChance >= 0.0 && randomChance <= 0.5) {
+//			extraBattle(); // depart for extra battle
+//		} else {
+//			concludeStage(); // 50% to conclude the stage
+//		}
 
 		// Battle Time!:
 		// generate two wild pokemon, then display their type and affinities
@@ -328,11 +328,6 @@ public class Game {
 		// pokemon would they like to send.
 		// (this section is handled by the departForBattle() method)
 
-	}
-
-	public void extraBattle() {
-		// Do something here...
-		concludeStage(); // will eventually do something and conclude the stage
 	}
 	
 	// FOR DEBUGGING PURPOSES!
