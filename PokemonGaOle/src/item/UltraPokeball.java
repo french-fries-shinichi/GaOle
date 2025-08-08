@@ -7,4 +7,8 @@ public class UltraPokeball extends Pokeball {
 		setProbabilityMultiplier(2.1);
 	}
 
+	@Override
+	public String toString() {
+		return "Ultra Pokeball";
+	}
 }

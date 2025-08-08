@@ -7,4 +7,8 @@ public class MasterPokeball extends Pokeball {
 		setProbabilityMultiplier(2.5);
 	}
 	
+	@Override
+	public String toString() {
+		return "Master Pokeball";
+	}
 }

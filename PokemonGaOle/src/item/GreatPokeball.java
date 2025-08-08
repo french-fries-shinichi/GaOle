@@ -6,4 +6,9 @@ public class GreatPokeball extends Pokeball {
 		super();
 		setProbabilityMultiplier(1.75);
 	}
+	
+	@Override
+	public String toString() {
+		return "Great Pokeball";
+	}
 }

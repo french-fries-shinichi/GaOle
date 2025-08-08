@@ -14,4 +14,8 @@ public class Pokeball {
 	protected void setProbabilityMultiplier(double probabilityMultiplier) {
 		this.probabilityMultiplier = probabilityMultiplier;
 	}
+	
+	public String toString() {
+		return "Normal Pokeball";
+	}
 }

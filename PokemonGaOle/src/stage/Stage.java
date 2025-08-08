@@ -13,6 +13,7 @@ public class Stage { // declare attributes
 	private String stageName;
 	private Pokemon[] likelyPokemons;
 	private Pokeball[] pokeballList = {new Pokeball(), new GreatPokeball(), new UltraPokeball(), new MasterPokeball()};
+	private Random rand = new Random();
 	//private Set<Pokemon> catchTimePokemons;
 	//private Pokemon capturedPokemon;
 	//private int battleScore;
@@ -92,14 +93,16 @@ public class Stage { // declare attributes
 	}
 	
 	public Pokemon generateWildPokemon() {
-		return new Pokemon(getLikelyPokemons()[0]);
+		int randomPokemon = rand.nextInt(getLikelyPokemons().length);
+		return new Pokemon(getLikelyPokemons()[randomPokemon]);
 	}
 	
-	public double generatePokeball() {
+	public Pokeball generatePokeball() {
 		System.out.println("Searching for Pokeballs...");
-		// randomizer
-		System.out.println("Yay! You've found a %s");
-		return 0.0;
+		// randomize the below code:
+		Pokeball ball = new Pokeball();
+		System.out.printf("Yay! You've found a %s\n", ball.toString());
+		return ball;
 	}
 	
 	// I couldnt decide whether to use "toString" or static "displayAllStages" for my menu...
