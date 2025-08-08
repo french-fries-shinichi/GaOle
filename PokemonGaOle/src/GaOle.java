@@ -12,7 +12,7 @@ public class GaOle {
 		
 		//UserSave playerDisk = new UserSave("PlayerOne"); //delete if not gonna use
 		//newGame.initiateStage();
-		newGame.initiatePlayerPokemons(playerPokemons);
-		newGame.start();
+		//newGame.initiatePlayerPokemons(playerPokemons);
+		//newGame.start();
 	}
 }

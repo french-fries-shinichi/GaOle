@@ -100,9 +100,9 @@ public class Stage { // declare attributes
 	public Pokeball generatePokeball() {
 		System.out.println("Searching for Pokeballs...");
 		// randomize the below code:
-		Pokeball ball = new Pokeball();
-		System.out.printf("Yay! You've found a %s\n", ball.toString());
-		return ball;
+		int randomPokeball = rand.nextInt(pokeballList.length);
+		System.out.printf("Yay! You've found a %s\n", pokeballList[randomPokeball]);
+		return pokeballList[randomPokeball];
 	}
 	
 	// I couldnt decide whether to use "toString" or static "displayAllStages" for my menu...

@@ -225,20 +225,21 @@ public class Game {
 		System.out.println("Enter the number of the Pokemon you want to catch: ");
 		int choice = s.nextInt() -1;
 		
-		if (choice >= 1 && choice <= 3) {
+		if (choice >= 0 && choice <= 2) {
 			// this is the "always capture" logic, in case the probability capture doesnt work
 			//System.out.println("you caught " +wildPokemons[choice - 1] + "!");
 			Pokeball ballFound = selectedStage.generatePokeball();
 			
-			if (randNumGen.nextDouble() > 0.1 * ballFound.getProbabilityMultiplier()) {
+			if (randNumGen.nextDouble() < 0.1 * ballFound.getProbabilityMultiplier()) {
 				playerPokemons.add(wildPokemons[choice]);
+				System.out.println(randNumGen.nextDouble());
 				System.out.println("You've captured the Pokemon successfully!");
 			} else {
 				System.out.println("Oh no, your attempt to capture the wild Pokemon has failed.");
 			}
 			// something like: if (rng <  * found.getProbabilityMultiplier())
 			// actually im too sleep deprived to figure it out
-		}  else {
+		} else {
 			System.out.println("DO error handling here...");
 		}
 	}
@@ -254,13 +255,18 @@ public class Game {
 		};
 		Scanner s = new Scanner(System.in);
 		
+		// calculate battle score
+		for (int i = 0; i<enemyPokemonList.length; i++) {
+			battleScore += enemyPokemonList[i].getHealthPoints();
+		}
+		
 		System.out.println("\n\n\nTwo wild pokemon approach for battle! It's battle time!");
 		System.out.printf("You've encountered a wild %s and %s !\n", enemyPokemonList[0].getName(), enemyPokemonList[1].getName());
 		
 		// then ask player which one of his pokemon, from his collection, does he want to send
 		System.out.println("You have the following Pokemon:");
 		for (int i = 0; i<playerPokemons.size(); i++) {
-			System.out.printf("%d - %s: %d HP\n", i+1, playerPokemons.get(0).getName(), playerPokemons.get(0).getHealthPoints());
+			System.out.printf("%d - %s: %d HP\n", i+1, playerPokemons.get(i).getName(), playerPokemons.get(i).getHealthPoints());
 		}
 		System.out.println("Which one do you want to send?\nFor your first Pokemon:");
 		int choiceOne = s.nextInt()-1;
@@ -271,6 +277,7 @@ public class Game {
 		
 		while (!enemyPokemonList[0].isPokemonFainted() || !enemyPokemonList[1].isPokemonFainted()) {
 			System.out.println();
+			System.out.println("== Player's Turn! ==\nWild Pokemon health:");
 			for (int i = 0; i<enemyPokemonList.length; i++) {
 				System.out.printf("%d - %s: %d HP\n", i+1, enemyPokemonList[i].getName(), enemyPokemonList[i].getHealthPoints());
 			}
@@ -286,7 +293,7 @@ public class Game {
 			playerPokemons.get(0).attack(enemyPokemonList[choice]);
 			
 			for (int i = 0; i<alliedPokemonList.length; i++) {
-				System.out.printf("%d - %s: %d HP\n", i+1, alliedPokemonList[0].getName(), alliedPokemonList[1].getHealthPoints());
+				System.out.printf("%d - %s: %d HP\n", i+1, alliedPokemonList[i].getName(), alliedPokemonList[i].getHealthPoints());
 			}
 
 			// Wild Pokemon Turn
@@ -317,9 +324,10 @@ public class Game {
 		concludeStage(); // will eventually do something and conclude the stage
 	}
 	
-	public void setBattleScore(int x) {
-		battleScore = x;
-	}
+	// FOR DEBUGGING PURPOSES!
+//	public void setBattleScore(int x) {
+//		battleScore = x;
+//	}
 	public void concludeStage() {
 		// calculate battle score
 		System.out.println("You scored: 100 battle points!");
@@ -361,8 +369,18 @@ public class Game {
 		}
 		
 		// compare the new battle-score to see if it's a highscore
-		//
+		boolean overwrite = false;
 		Arrays.sort(scoreList, Collections.reverseOrder());
+		for (Integer x : scoreList) {
+			if (battleScore > x) {
+				overwrite = true;
+				break;
+			}
+		}
+		if (overwrite = true) {
+			scoreList[4] = battleScore;
+			Arrays.sort(scoreList, Collections.reverseOrder());
+		}
 		
 		// store in a leaderboard file
 		try {
